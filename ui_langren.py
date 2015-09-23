@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from PyQt4 import QtCore, QtGui
+from LOL_jungle import Keythread,Mythread
 import sys
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -20,11 +21,10 @@ class Ui_Dialog(QtGui.QWidget):
     def  __init__(self, parent = None):
         QtGui.QWidget.__init__(self, parent)
         self.setupUi(self)
-        self.retranslateUi(self)
 
     def setupUi(self, Dialog):
         Dialog.setObjectName(_fromUtf8("Dialog"))
-        Dialog.resize(400, 300)
+        Dialog.setFixedSize(400, 300)
         self.pushButton = QtGui.QPushButton(Dialog)
         self.pushButton.setGeometry(QtCore.QRect(130, 190, 131, 81))
         self.pushButton.setObjectName(_fromUtf8("pushButton"))
@@ -34,17 +34,17 @@ class Ui_Dialog(QtGui.QWidget):
         self.label = QtGui.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(20, 40, 81, 81))
         self.label.setText(_fromUtf8(""))
-        self.label.setPixmap(QtGui.QPixmap(_fromUtf8("../../Users/Root_/Desktop/web.png")))
+        self.label.setPixmap(QtGui.QPixmap(_fromUtf8("./pic/web.png")))
         self.label.setObjectName(_fromUtf8("label"))
         self.label_2 = QtGui.QLabel(Dialog)
         self.label_2.setGeometry(QtCore.QRect(30, 190, 71, 71))
         self.label_2.setText(_fromUtf8(""))
-        self.label_2.setPixmap(QtGui.QPixmap(_fromUtf8("../../Users/Root_/Desktop/web.png")))
+        self.label_2.setPixmap(QtGui.QPixmap(_fromUtf8("./pic/web1.png")))
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.label_3 = QtGui.QLabel(Dialog)
         self.label_3.setGeometry(QtCore.QRect(290, 190, 71, 71))
         self.label_3.setText(_fromUtf8(""))
-        self.label_3.setPixmap(QtGui.QPixmap(_fromUtf8("../../Users/Root_/Desktop/web.png")))
+        self.label_3.setPixmap(QtGui.QPixmap(_fromUtf8("./pic/web2.png")))
         self.label_3.setObjectName(_fromUtf8("label_3"))
 
         self.retranslateUi(Dialog)
@@ -62,9 +62,19 @@ class Ui_Dialog(QtGui.QWidget):
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">1.确保使用的英雄是狼人（嗜血猎手）。</p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">2.确保已经买了装备 <span style=\" font-weight:600;\">比尔吉沃特弯刀 + 反曲之弓 </span>确保你刷野时不会被野怪打死。</p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">3.按下 键盘上的 <span style=\" font-size:12pt; font-weight:600;\">M </span>键可以退出本程序。</p></body></html>", None))
-
-
+        QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.pushButton.hide)
+        QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.subprocess)
+       
+    def subprocess(self):
+        self.keypro = Keythread()
+        self.mypro = Mythread()
+        print "ssssff"
+        self.keypro.start()
+        print "after start"
+        self.mypro.start()
+        self.connect(self.keypro, QtCore.SIGNAL("clos"), QtGui.qApp,QtCore.SLOT('quit()'))
 app = QtGui.QApplication(sys.argv)
 qb = Ui_Dialog()
 qb.show()
+#qb.subprocess()
 sys.exit(app.exec_())

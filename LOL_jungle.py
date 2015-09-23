@@ -4,8 +4,8 @@ import win32con
 import ctypes ,ctypes.wintypes,win32gui
 import threading
 import time
-import Thread_key
-
+import pythoncom
+import pyHook
 
 
 def press_q():
@@ -154,40 +154,35 @@ def shengji():
    time.sleep(0.1)
    mouse_lclick()
    time.sleep(0.1)
-#mouse_set(500,500)
-#mouse_rclick()
-
-EXIT = False
-class Hotkey(threading.Thread):
- 
+class Mythread(threading.Thread):
+    daemon=True    #保证主进程结束时子进程也结束
+    def __init__ (self):
+        threading.Thread.__init__(self)
+    def onKeyboardEvent(self,event):
+        # 监听键盘事件
+        global press
+        if event.Key == 'M':
+            #event.set()
+            print "22222222"
+            press.clear()
+        #print "Key:", event.Key
     def run(self):
-        global EXIT
-        user32 = ctypes.windll.user32
-        if not user32.RegisterHotKey(None, 99, win32con.MOD_WIN, win32con.VK_F3):
-            raise RuntimeError
-        try:
-            msg = ctypes.wintypes.MSG()
-            print msg
-            while user32.GetMessageA(ctypes.byref(msg), None, 0, 0) != 0:
-                if msg.message == win32con.WM_HOTKEY:
-                    if msg.wParam == 99:
-                        EXIT = True
-                        return
-                user32.TranslateMessage(ctypes.byref(msg))
-                user32.DispatchMessageA(ctypes.byref(msg))
-        finally:
-            user32.UnregisterHotKey(None, 1)
+        
+        hm = pyHook.HookManager()
+        hm.KeyDown = self.onKeyboardEvent
+        hm.HookKeyboard()
+        pythoncom.PumpMessages()
+        return True   
 
 press=threading.Event()
 press.set()
-pr=Thread_key.Mythread()
+pr=Mythread()
 time.sleep(10)
 #pr=Thread_key.Mythread()
 pr.start()
       
 while True:
     shengji()
-    
     goto_StoneMan()
     #time.sleep(1)
     w_beat()
@@ -209,9 +204,10 @@ while True:
     kill(4,6)
     time.sleep(3)
     come_back()
+    print "huicheng"
     if not press.isSet():
         break
     #time.sleep(5)
-
+print "I Stop!"
 #time.sleep(5)
 

@@ -8,30 +8,30 @@ import threading
 import time
 
 time.sleep(10)
-#win32api.keybd_event(17,0,0,0)  #ctrl键位码是17
+#win32api.keybd_event(17,0,0,0)  #ctrl閿綅鐮佹槸17
 
-#win32api.keybd_event(86,0,0,0)  #v键位码是86
+#win32api.keybd_event(86,0,0,0)  #v閿綅鐮佹槸86
 
-#win32api.keybd_event(86,0,win32con.KEYEVENTF_KEYUP,0) #释放按键
+#win32api.keybd_event(86,0,win32con.KEYEVENTF_KEYUP,0) #閲婃斁鎸夐敭
 
 #win32api.keybd_event(17,0,win32con.KEYEVENTF_KEYUP,0)
 
 def press_q():
-   win32api.keybd_event(81,0,0,0)  #q键位码是81
+   win32api.keybd_event(81,0,0,0)  #q閿綅鐮佹槸81
    time.sleep(1)
    win32api.keybd_event(81,0,win32con.KEYEVENTF_KEYUP,0)
    time.sleep(1)
 def press_w():
    time.sleep(1)
-   win32api.keybd_event(87,0,0,0)  #w键位码是81
+   win32api.keybd_event(87,0,0,0)  #w閿綅鐮佹槸81
    time.sleep(1)
    win32api.keybd_event(87,0,win32con.KEYEVENTF_KEYUP,0)
    time.sleep(1)
 def press_e():
-   win32api.keybd_event(69,0,0,0)  #e键位码是81
+   win32api.keybd_event(69,0,0,0)  #e閿綅鐮佹槸81
    win32api.keybd_event(69,0,win32con.KEYEVENTF_KEYUP,0)
 def press_r():
-   win32api.keybd_event(82,0,0,0)  #r键位码是81
+   win32api.keybd_event(82,0,0,0)  #r閿綅鐮佹槸81
    win32api.keybd_event(82,0,win32con.KEYEVENTF_KEYUP,0)
 
 def mouse_move(x,y):

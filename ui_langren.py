@@ -21,7 +21,7 @@ class Ui_Dialog(QtGui.QWidget):
     def  __init__(self, parent = None):
         QtGui.QWidget.__init__(self, parent)
         self.setupUi(self)
-
+        self.setWindowIcon(QtGui.QIcon('./pic/ico.png'))
     def setupUi(self, Dialog):
         Dialog.setObjectName(_fromUtf8("Dialog"))
         Dialog.setFixedSize(400, 300)

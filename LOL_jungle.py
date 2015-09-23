@@ -6,7 +6,7 @@ import threading
 import time
 import Thread_key
 
-time.sleep(10)
+
 
 def press_q():
    win32api.keybd_event(81,0,0,0)  #q键位码是81
@@ -178,12 +178,13 @@ class Hotkey(threading.Thread):
         finally:
             user32.UnregisterHotKey(None, 1)
 
-
-
+press=threading.Event()
+press.set()
 pr=Thread_key.Mythread()
+time.sleep(10)
+#pr=Thread_key.Mythread()
 pr.start()
-global press=threading.Event()
-press.set()          
+      
 while True:
     shengji()
     

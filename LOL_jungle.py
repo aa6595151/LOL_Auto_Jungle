@@ -144,7 +144,7 @@ class Mythread(QtCore.QThread):
        #time.sleep(0.1)
        #w_beat()
        time.sleep(0.1)
-       e_beat()
+       self.e_beat()
     def kill(self,x,y):
         for i in range(y):
             self.kill_them(x)

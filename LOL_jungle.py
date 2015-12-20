@@ -166,7 +166,7 @@ class Mythread(QtCore.QThread):
         time.sleep(0.1)
         self.mouse_lclick()
         time.sleep(10)
-        self.mouse_set(694, 402)
+        self.mouse_set(694, 412)
         time.sleep(0.1)
         self.mouse_rclick()
         
